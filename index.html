@@ -1,477 +1,970 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For My Dearest Pfano</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background: linear-gradient(135deg, #ff6b9d, #ff8fab, #ffb3c6);
-            color: #5a0035;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            overflow-x: hidden;
-        }
-        
-        .container {
-            max-width: 800px;
-            width: 100%;
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(165, 0, 80, 0.3);
-            padding: 40px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            animation: fadeIn 1.5s ease-out;
-        }
-        
-        .heart-bg {
-            position: absolute;
-            font-size: 20px;
-            color: rgba(255, 107, 157, 0.2);
-            z-index: 0;
-            animation: float 5s infinite ease-in-out;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0); }
-            50% { transform: translateY(-20px) rotate(10deg); }
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        h1 {
-            font-size: 2.8rem;
-            margin-bottom: 10px;
-            color: #9d174d;
-            position: relative;
-            z-index: 1;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        
-        .name {
-            color: #ff0055;
-            font-weight: 800;
-            text-decoration: underline;
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.8; }
-        }
-        
-        .subtitle {
-            font-size: 1.4rem;
-            margin-bottom: 30px;
-            color: #7c2d5c;
-            font-style: italic;
-        }
-        
-        .poem-container {
-            background: linear-gradient(to right, #ffe4ec, #ffcfe1);
-            border-radius: 15px;
-            padding: 25px;
-            margin: 30px 0;
-            text-align: center;
-            border-left: 5px solid #ff0055;
-            position: relative;
-            z-index: 1;
-            transform: perspective(500px) rotateX(0deg);
-            transition: transform 0.5s;
-        }
-        
-        .poem-container:hover {
-            transform: perspective(500px) rotateX(5deg);
-        }
-        
-        .poem-title {
-            font-size: 1.6rem;
-            margin-bottom: 15px;
-            color: #9d174d;
-            font-weight: 600;
-        }
-        
-        .poem {
-            font-size: 1.2rem;
-            line-height: 1.6;
-            color: #5a0035;
-            font-style: italic;
-        }
-        
-        .poem-author {
-            text-align: right;
-            margin-top: 10px;
-            font-weight: 600;
-            color: #9d174d;
-        }
-        
-        .bible-verse {
-            background-color: #fef2f7;
-            padding: 15px;
-            border-radius: 10px;
-            margin: 25px 0;
-            font-size: 1.3rem;
-            color: #7c2d5c;
-            border: 2px dashed #ff8fab;
-        }
-        
-        .verse {
-            font-weight: 600;
-            color: #9d174d;
-        }
-        
-        .question {
-            font-size: 1.8rem;
-            margin: 30px 0;
-            color: #5a0035;
-            font-weight: 600;
-        }
-        
-        .buttons {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 30px;
-            flex-wrap: wrap;
-        }
-        
-        .btn {
-            padding: 18px 45px;
-            font-size: 1.5rem;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 700;
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-width: 180px;
-        }
-        
-        .btn-yes {
-            background: linear-gradient(to right, #4CAF50, #2E7D32);
-            color: white;
-            transform: scale(1);
-        }
-        
-        .btn-no {
-            background: linear-gradient(to right, #f44336, #c62828);
-            color: white;
-        }
-        
-        .btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 20px rgba(0, 0, 0, 0.2);
-        }
-        
-        .btn:active {
-            transform: translateY(0);
-        }
-        
-        .btn-yes:hover {
-            background: linear-gradient(to right, #2E7D32, #1B5E20);
-        }
-        
-        .btn-no:hover {
-            background: linear-gradient(to right, #c62828, #b71c1c);
-        }
-        
-        .heart-icon {
-            margin-right: 10px;
-            font-size: 1.8rem;
-        }
-        
-        .message {
-            margin-top: 25px;
-            padding: 15px;
-            background-color: #f8bbd9;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            color: #5a0035;
-            display: none;
-            animation: fadeIn 0.5s;
-        }
-        
-        footer {
-            margin-top: 30px;
-            color: #5a0035;
-            font-size: 1rem;
-            text-align: center;
-            opacity: 0.8;
-        }
-        
-        .hearts-container {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 20px;
-        }
-        
-        .heart {
-            font-size: 2rem;
-            color: #ff0055;
-            animation: heartbeat 1.2s infinite;
-        }
-        
-        @keyframes heartbeat {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-        }
-        
-        /* Responsive design */
-        @media (max-width: 768px) {
-            .container {
-                padding: 25px;
-            }
-            
-            h1 {
-                font-size: 2.2rem;
-            }
-            
-            .subtitle {
-                font-size: 1.2rem;
-            }
-            
-            .poem {
-                font-size: 1.1rem;
-            }
-            
-            .buttons {
-                flex-direction: column;
-                align-items: center;
-                gap: 20px;
-            }
-            
-            .btn {
-                width: 100%;
-                max-width: 300px;
-            }
-        }
-        
-        /* Animation for growing button */
-        @keyframes grow {
-            0% { transform: scale(1); }
-            100% { transform: scale(var(--scale-factor)); }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Retema Student Accommodation | UNIVEN Living</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <!-- Lightbox CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #121212;
+      color: #ffffff;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    /* Header */
+    header {
+      background: #0f0f0f;
+      padding: 25px 0;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      border-bottom: 2px solid #e63946;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+    .nav-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .logo {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      flex-wrap: wrap;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .logo:hover {
+      transform: scale(1.02);
+    }
+    .logo-main {
+      font-size: 3.2rem;
+      font-weight: 800;
+      letter-spacing: -1px;
+      color: #e63946;
+      line-height: 1;
+    }
+    .logo-sub {
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.5);
+      letter-spacing: 0.5px;
+      line-height: 1.4;
+    }
+    
+    /* Menu Button */
+    .menu-btn {
+      background: #e63946;
+      color: white;
+      border: none;
+      padding: 14px 32px;
+      border-radius: 50px;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: all 0.3s;
+    }
+    .menu-btn:hover {
+      background: #c92a3a;
+      transform: scale(1.05);
+      box-shadow: 0 5px 20px rgba(230, 57, 70, 0.4);
+    }
+    
+    /* Overlay Menu */
+    .menu-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.96);
+      z-index: 2000;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(15px);
+    }
+    .menu-overlay.active {
+      display: flex;
+      animation: fadeIn 0.3s ease;
+    }
+    .menu-container {
+      background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%);
+      border-radius: 48px;
+      padding: 50px;
+      max-width: 550px;
+      width: 90%;
+      text-align: center;
+      border: 2px solid #e63946;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    .menu-container h2 {
+      color: #e63946;
+      margin-bottom: 35px;
+      font-size: 2.2rem;
+    }
+    .menu-options {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .menu-option {
+      background: #2a2a2a;
+      padding: 18px 28px;
+      border-radius: 60px;
+      text-decoration: none;
+      color: white;
+      font-weight: 600;
+      font-size: 1.2rem;
+      transition: all 0.3s;
+      cursor: pointer;
+      border: 1px solid rgba(230, 57, 70, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      justify-content: center;
+    }
+    .menu-option:hover {
+      background: #e63946;
+      transform: translateX(12px);
+      border-color: #e63946;
+    }
+    .close-menu {
+      margin-top: 35px;
+      background: transparent;
+      border: 2px solid #e63946;
+      color: white;
+      padding: 12px 28px;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+    .close-menu:hover {
+      background: #e63946;
+      transform: scale(1.05);
+    }
+    
+    /* Main Content Area - Pages */
+    .page-container {
+      margin-top: 110px;
+      min-height: calc(100vh - 110px);
+      padding-bottom: 60px;
+    }
+    .page {
+      display: none;
+      animation: pageFadeIn 0.6s ease;
+    }
+    .page.active {
+      display: block;
+    }
+    @keyframes pageFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, #111 0%, #1f1f1f 100%);
+      padding: 80px 60px;
+      border-radius: 48px;
+      margin-bottom: 50px;
+    }
+    .hero-grid {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 60px;
+    }
+    .hero-text {
+      flex: 1;
+    }
+    .hero-text h2 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+    .hero-text p {
+      margin: 25px 0;
+      font-size: 1.2rem;
+      color: #ccc;
+      line-height: 1.6;
+    }
+    .hero-badge {
+      background: #e63946;
+      display: inline-block;
+      padding: 8px 20px;
+      border-radius: 40px;
+      font-size: 0.9rem;
+      font-weight: bold;
+      margin-bottom: 25px;
+    }
+    .hero-icon {
+      flex: 1;
+      text-align: center;
+      font-size: 12rem;
+      color: #e63946;
+      opacity: 0.8;
+    }
+    
+    .section-title {
+      font-size: 2.8rem;
+      font-weight: 800;
+      margin-bottom: 45px;
+      position: relative;
+      display: inline-block;
+    }
+    .section-title:after {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      left: 0;
+      width: 80px;
+      height: 4px;
+      background: #e63946;
+    }
+    
+    /* Rooms Grid */
+    .rooms-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+      gap: 45px;
+      margin-top: 30px;
+    }
+    .room-card {
+      background: #1e1e1e;
+      border-radius: 32px;
+      overflow: hidden;
+      transition: all 0.3s;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+    .room-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+    .room-img-gallery {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3px;
+      cursor: pointer;
+    }
+    .room-img-gallery img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      transition: all 0.3s;
+    }
+    .room-img-gallery img:hover {
+      opacity: 0.85;
+      transform: scale(1.02);
+    }
+    .room-info {
+      padding: 25px;
+    }
+    .price {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #e63946;
+      margin-bottom: 8px;
+    }
+    .btn-whatsapp-room {
+      background: #25D366;
+      color: white;
+      border: none;
+      padding: 14px 20px;
+      border-radius: 50px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      justify-content: center;
+      text-decoration: none;
+      width: 100%;
+      margin-top: 20px;
+      font-size: 1rem;
+      transition: all 0.3s;
+    }
+    .btn-whatsapp-room:hover {
+      background: #128C7E;
+      transform: scale(1.02);
+    }
+    
+    /* Amenities */
+    .amenities-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      margin-top: 30px;
+    }
+    .amenity-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #2a2a2a;
+      padding: 12px 24px;
+      border-radius: 60px;
+      font-size: 1rem;
+      transition: all 0.3s;
+    }
+    .amenity-item:hover {
+      background: #e63946;
+      transform: translateY(-3px);
+    }
+    .amenity-item i {
+      font-size: 1.4rem;
+      color: #e63946;
+    }
+    .amenity-item:hover i {
+      color: white;
+    }
+    
+    /* Gallery Grid */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 30px;
+      margin-top: 30px;
+    }
+    .gallery-item {
+      border-radius: 28px;
+      overflow: hidden;
+      height: 260px;
+      position: relative;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: all 0.4s;
+    }
+    .gallery-item:hover {
+      transform: scale(1.03);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+    }
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+    .gallery-caption {
+      position: absolute;
+      bottom: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+      width: 100%;
+      padding: 20px 15px 15px;
+      text-align: center;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+    
+    /* Review Board */
+    .review-board {
+      background: #1e1e1e;
+      border-radius: 40px;
+      padding: 40px;
+    }
+    .rating-stars {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 35px;
+    }
+    .stars {
+      font-size: 2rem;
+      letter-spacing: 5px;
+    }
+    .review-card {
+      background: #2a2a2a;
+      padding: 25px;
+      border-radius: 28px;
+      margin-bottom: 20px;
+      transition: all 0.3s;
+    }
+    .review-card:hover {
+      transform: translateX(8px);
+      background: #353535;
+    }
+    .review-form input, .review-form textarea, .review-form select {
+      width: 100%;
+      background: #2c2c2c;
+      border: 1px solid #444;
+      padding: 14px;
+      border-radius: 28px;
+      color: white;
+      margin: 10px 0;
+      font-size: 1rem;
+    }
+    
+    /* Map */
+    #map {
+      height: 480px;
+      width: 100%;
+      border-radius: 32px;
+      border: 3px solid #e63946;
+      margin-top: 30px;
+    }
+    
+    /* Footer */
+    footer {
+      background: #0a0a0a;
+      padding: 60px 0 30px;
+      margin-top: 60px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 50px;
+      margin-bottom: 50px;
+    }
+    .footer-col h4 {
+      color: #e63946;
+      margin-bottom: 25px;
+      font-size: 1.3rem;
+    }
+    .footer-col ul {
+      list-style: none;
+    }
+    .footer-col li, .footer-col a {
+      color: #bbb;
+      text-decoration: none;
+      line-height: 2.2;
+      transition: 0.2s;
+    }
+    .footer-col a:hover {
+      color: #e63946;
+      padding-left: 5px;
+    }
+    .social-icons a {
+      font-size: 2rem;
+      margin-right: 20px;
+      color: white;
+      display: inline-block;
+      transition: all 0.3s;
+    }
+    .social-icons a:hover {
+      color: #e63946;
+      transform: translateY(-5px);
+    }
+    .footer-whatsapp a {
+      background: #25D366;
+      padding: 12px 25px;
+      border-radius: 50px;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: white;
+      text-decoration: none;
+      margin-top: 20px;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+    .footer-whatsapp a:hover {
+      transform: scale(1.05);
+      background: #128C7E;
+    }
+    
+    @media (max-width: 768px) {
+      .container { padding: 0 20px; }
+      .logo-main { font-size: 2rem; }
+      .logo-sub { font-size: 0.8rem; }
+      .hero { padding: 40px 25px; }
+      .hero-text h2 { font-size: 2rem; }
+      .hero-icon { font-size: 6rem; }
+      .section-title { font-size: 2rem; }
+      .rooms-grid { grid-template-columns: 1fr; gap: 30px; }
+      .menu-container { padding: 30px 20px; }
+      .menu-option { padding: 14px 20px; font-size: 1rem; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .footer-grid { gap: 30px; }
+    }
+  </style>
 </head>
 <body>
-    <!-- Background hearts -->
-    <div id="hearts-bg"></div>
-    
-    <div class="container">
-        <h1>For My Dearest <span class="name">Pfano</span></h1>
-        <p class="subtitle">A special question just for you...</p>
-        
-        <div class="poem-container">
-            <div class="poem-title">How Do I Love Thee? (Sonnet 43)</div>
-            <div class="poem">
-                How do I love thee? Let me count the ways.<br>
-                I love thee to the depth and breadth and height<br>
-                My soul can reach, when feeling out of sight<br>
-                For the ends of being and ideal grace.<br>
-                I love thee to the level of every day's<br>
-                Most quiet need, by sun and candle-light.<br>
-                I love thee freely, as men strive for right;<br>
-                I love thee purely, as they turn from praise.
-            </div>
-            <div class="poem-author">- Elizabeth Barrett Browning</div>
-        </div>
-        
-        <div class="bible-verse">
-            <span class="verse">Song of Solomon 4:7</span> - "You are altogether beautiful, my love; there is no flaw in you."
-        </div>
-        
-        <div class="question">Pfano, will you be my Valentine this year?</div>
-        
-        <div class="buttons">
-            <button class="btn btn-yes" id="yesBtn">
-                <i class="fas fa-heart heart-icon"></i> Yes, Absolutely!
-            </button>
-            <button class="btn btn-no" id="noBtn">
-                <i class="fas fa-times heart-icon"></i> No
-            </button>
-        </div>
-        
-        <div class="message" id="message">
-            <i class="fas fa-check-circle"></i> Wonderful! I've sent you a WhatsApp message. Please check your phone!
-        </div>
-        
-        <div class="hearts-container" id="hearts">
-            <!-- Hearts will be added here by JavaScript -->
-        </div>
-        
-        <footer>
-            Made with <i class="fas fa-heart" style="color:#ff0055;"></i> for Pfano
-        </footer>
-    </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Create background hearts
-            const heartsBg = document.getElementById('hearts-bg');
-            for (let i = 0; i < 25; i++) {
-                const heart = document.createElement('div');
-                heart.className = 'heart-bg';
-                heart.innerHTML = '❤';
-                heart.style.left = Math.random() * 100 + 'vw';
-                heart.style.top = Math.random() * 100 + 'vh';
-                heart.style.fontSize = (Math.random() * 25 + 15) + 'px';
-                heart.style.animationDelay = Math.random() * 5 + 's';
-                heartsBg.appendChild(heart);
-            }
-            
-            // Create floating hearts in the container
-            const heartsContainer = document.getElementById('hearts');
-            for (let i = 0; i < 8; i++) {
-                const heart = document.createElement('div');
-                heart.className = 'heart';
-                heart.innerHTML = '❤';
-                heart.style.animationDelay = (i * 0.3) + 's';
-                heartsContainer.appendChild(heart);
-            }
-            
-            const yesBtn = document.getElementById('yesBtn');
-            const noBtn = document.getElementById('noBtn');
-            const message = document.getElementById('message');
-            let noCount = 0;
-            let scaleFactor = 1;
-            
-            // No button functionality
-            noBtn.addEventListener('click', function() {
-                noCount++;
-                
-                // Make the Yes button bigger with each click
-                scaleFactor += 0.3;
-                yesBtn.style.setProperty('--scale-factor', scaleFactor);
-                yesBtn.style.animation = 'grow 0.5s forwards';
-                
-                // Change the No button text randomly
-                const noTexts = [
-                    "Are you sure?",
-                    "Really sure?",
-                    "Think again!",
-                    "Last chance!",
-                    "Surely not?",
-                    "You might regret this!",
-                    "Give it another thought!",
-                    "This could be a mistake!",
-                    "Have a heart!",
-                    "Don't be so cold!",
-                    "Change of heart?",
-                    "Wouldn't you reconsider?",
-                    "Is that your final answer?",
-                    "You're breaking my heart!",
-                    "Please? 🥺"
-                ];
-                
-                const randomIndex = Math.min(noCount - 1, noTexts.length - 1);
-                noBtn.innerHTML = `<i class="fas fa-times heart-icon"></i> ${noTexts[randomIndex]}`;
-                
-                // Reset animation after it completes
-                setTimeout(() => {
-                    yesBtn.style.animation = '';
-                }, 500);
-                
-                // Move the No button to a random position after 3 clicks
-                if (noCount >= 3) {
-                    const container = document.querySelector('.container');
-                    const containerRect = container.getBoundingClientRect();
-                    const maxX = containerRect.width - noBtn.offsetWidth - 20;
-                    const maxY = containerRect.height - noBtn.offsetHeight - 20;
-                    
-                    const randomX = Math.random() * maxX;
-                    const randomY = Math.random() * maxY;
-                    
-                    noBtn.style.position = 'absolute';
-                    noBtn.style.left = randomX + 'px';
-                    noBtn.style.top = randomY + 'px';
-                    
-                    // Reset position after a short time (for mobile)
-                    setTimeout(() => {
-                        noBtn.style.position = '';
-                        noBtn.style.left = '';
-                        noBtn.style.top = '';
-                    }, 800);
-                }
-            });
-            
-            // Yes button functionality
-            yesBtn.addEventListener('click', function() {
-                // Show success message
-                message.style.display = 'block';
-                
-                // Create celebration hearts
-                for (let i = 0; i < 20; i++) {
-                    const heart = document.createElement('div');
-                    heart.innerHTML = '❤';
-                    heart.style.position = 'fixed';
-                    heart.style.color = '#ff0055';
-                    heart.style.fontSize = (Math.random() * 25 + 20) + 'px';
-                    heart.style.left = Math.random() * 100 + 'vw';
-                    heart.style.top = '100vh';
-                    heart.style.zIndex = '9999';
-                    heart.style.pointerEvents = 'none';
-                    document.body.appendChild(heart);
-                    
-                    // Animate the heart
-                    const animation = heart.animate([
-                        { top: '100vh', opacity: 1 },
-                        { top: Math.random() * 80 + 'vh', opacity: 0.7 },
-                        { top: '-10vh', opacity: 0 }
-                    ], {
-                        duration: Math.random() * 2000 + 2000,
-                        easing: 'cubic-bezier(0.215, 0.61, 0.355, 1)'
-                    });
-                    
-                    // Remove heart after animation
-                    animation.onfinish = () => heart.remove();
-                }
-                
-                // Send WhatsApp message
-                const phoneNumber = "27834878488";
-                const messageText = "Pfano said YES to being my Valentine! 💖";
-                const encodedMessage = encodeURIComponent(messageText);
-                const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-                
-                // Open WhatsApp in a new tab
-                setTimeout(() => {
-                    window.open(whatsappURL, '_blank');
-                }, 1500);
-                
-                // Change button text
-                yesBtn.innerHTML = '<i class="fas fa-heart heart-icon"></i> She Said YES!';
-                yesBtn.style.background = 'linear-gradient(to right, #FF9800, #FF5722)';
-                
-                // Hide the No button
-                noBtn.style.display = 'none';
-            });
-            
-            // Reset animation on Yes button after it completes
-            yesBtn.addEventListener('animationend', function() {
-                yesBtn.style.animation = '';
-            });
-        });
-    </script>
+<header>
+  <div class="container nav-flex">
+    <div class="logo" id="logoHome">
+      <span class="logo-main">Retema</span>
+      <span class="logo-sub">accommodation</span>
+    </div>
+    <button class="menu-btn" id="menuButton">
+      <i class="fas fa-bars"></i> Menu
+    </button>
+  </div>
+</header>
+
+<!-- Overlay Menu -->
+<div class="menu-overlay" id="menuOverlay">
+  <div class="menu-container">
+    <h2><i class="fas fa-compass"></i> Navigate</h2>
+    <div class="menu-options">
+      <div class="menu-option" data-page="home"><i class="fas fa-home"></i> Home</div>
+      <div class="menu-option" data-page="about"><i class="fas fa-info-circle"></i> About Us</div>
+      <div class="menu-option" data-page="rooms"><i class="fas fa-bed"></i> Rooms & Pricing</div>
+      <div class="menu-option" data-page="gallery"><i class="fas fa-images"></i> Gallery</div>
+      <div class="menu-option" data-page="reviews"><i class="fas fa-star"></i> Reviews</div>
+      <div class="menu-option" data-page="map"><i class="fas fa-map-marker-alt"></i> Location Map</div>
+      <div class="menu-option" data-page="contact"><i class="fas fa-phone-alt"></i> Contact</div>
+    </div>
+    <button class="close-menu" id="closeMenu"><i class="fas fa-times"></i> Close Menu</button>
+  </div>
+</div>
+
+<!-- Main Content - Pages -->
+<div class="page-container">
+  <!-- Home Page -->
+  <div class="page active" id="home-page">
+    <div class="container">
+      <div class="hero">
+        <div class="hero-grid">
+          <div class="hero-text">
+            <div class="hero-badge">🏠 Maungani | UNIVEN Main Gate</div>
+            <h2>Live, Study, Thrive<br> at <span style="color:#e63946">Retema</span></h2>
+            <p>Premium student accommodation for funded & unfunded students. Only steps from University of Venda. Safe, modern & built for success with 24/7 security, unlimited WiFi, and all amenities included.</p>
+            <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+              <button class="menu-btn" style="background: #e63946;" id="exploreBtn">Explore Rooms <i class="fas fa-arrow-right"></i></button>
+              <button class="menu-btn" style="background: transparent; border: 2px solid #e63946;" id="contactBtn">Contact Us</button>
+            </div>
+            <div style="margin-top: 30px; display: flex; gap: 25px; flex-wrap: wrap;">
+              <span><i class="fas fa-check-circle" style="color:#e63946"></i> NSFAS & Bursary friendly</span>
+              <span><i class="fas fa-moon"></i> Sleepovers allowed</span>
+              <span><i class="fas fa-wifi"></i> Free unlimited WiFi</span>
+            </div>
+          </div>
+          <div class="hero-icon">
+            <i class="fas fa-building"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- About Page -->
+  <div class="page" id="about-page">
+    <div class="container">
+      <h1 class="section-title">About Retema</h1>
+      <div style="background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%); padding: 45px; border-radius: 40px; margin-bottom: 40px;">
+        <p style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 30px;">We offer premium, secure student living at Maungani, just next to University of Venda Main Gate. Every unit includes <strong>in-suite stoves, fridges, laundry sites, tuckshop, parking, 24/7 CCTV, tight security, communal kitchen, unlimited WiFi, and continuous hot water.</strong></p>
+        <p style="font-size: 1.1rem; color: #ccc;">Whether funded by NSFAS or private, we ensure comfort and academic focus. Our residence is designed to provide the perfect balance between studying and relaxation.</p>
+      </div>
+      
+      <h3 style="color: #e63946; margin: 40px 0 25px; font-size: 1.8rem;">✨ All Amenities</h3>
+      <div class="amenities-list">
+        <div class="amenity-item"><i class="fas fa-wifi"></i> Unlimited WiFi</div>
+        <div class="amenity-item"><i class="fas fa-tshirt"></i> Laundry Site</div>
+        <div class="amenity-item"><i class="fas fa-fire"></i> Stove & Fridge</div>
+        <div class="amenity-item"><i class="fas fa-store"></i> Tuckshop</div>
+        <div class="amenity-item"><i class="fas fa-car"></i> Secure Parking</div>
+        <div class="amenity-item"><i class="fas fa-video"></i> 24/7 CCTV</div>
+        <div class="amenity-item"><i class="fas fa-shield-alt"></i> Tight Security</div>
+        <div class="amenity-item"><i class="fas fa-utensils"></i> Communal Kitchen</div>
+        <div class="amenity-item"><i class="fas fa-hot-tub"></i> Hot Water 24/7</div>
+        <div class="amenity-item"><i class="fas fa-bed"></i> In-suite Rooms</div>
+        <div class="amenity-item"><i class="fas fa-tv"></i> Smart TV</div>
+        <div class="amenity-item"><i class="fas fa-snowplow"></i> Backup Water</div>
+      </div>
+      
+      <div style="margin-top: 40px; background: linear-gradient(135deg, #e6394622 0%, #e6394608 100%); padding: 25px 35px; border-radius: 40px; border-left: 4px solid #e63946;">
+        <i class="fas fa-users" style="font-size: 1.5rem; color: #e63946;"></i>
+        <strong style="margin-left: 10px; font-size: 1.2rem;">Sleepovers allowed</strong>
+        <p style="margin-top: 12px; color: #ccc;">We understand the importance of social connection. Guests are welcome with prior arrangement and adherence to our guest policy.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Rooms Page -->
+  <div class="page" id="rooms-page">
+    <div class="container">
+      <h1 class="section-title">Rooms to choose from</h1>
+      <div class="rooms-grid" id="roomsContainer"></div>
+    </div>
+  </div>
+
+  <!-- Gallery Page -->
+  <div class="page" id="gallery-page">
+    <div class="container">
+      <h1 class="section-title">Facilities & Common Areas</h1>
+      <div class="gallery-grid" id="facilityGallery"></div>
+    </div>
+  </div>
+
+  <!-- Reviews Page -->
+  <div class="page" id="reviews-page">
+    <div class="container">
+      <h1 class="section-title">Ratings & Reviews</h1>
+      <div class="review-board">
+        <div class="rating-stars">
+          <div class="stars" id="avgStars">★★★★★</div>
+          <span id="avgRatingDisplay" style="font-size: 1.5rem; font-weight: 700;">5.0</span>
+          <span style="color: #888;">(<span id="reviewCount">0</span> reviews)</span>
+        </div>
+        <div id="reviewsList">
+          <div class="review-card"><i>No reviews yet. Be the first to share your experience!</i></div>
+        </div>
+        <div class="review-form" style="margin-top: 35px;">
+          <h3 style="margin-bottom: 20px; font-size: 1.5rem;">Write a review</h3>
+          <input type="text" id="reviewerName" placeholder="Your name">
+          <select id="reviewRating">
+            <option value="5">★★★★★ (5) - Excellent</option>
+            <option value="4">★★★★☆ (4) - Very Good</option>
+            <option value="3">★★★☆☆ (3) - Good</option>
+            <option value="2">★★☆☆☆ (2) - Fair</option>
+            <option value="1">★☆☆☆☆ (1) - Poor</option>
+          </select>
+          <textarea id="reviewComment" rows="4" placeholder="Tell us about your stay..."></textarea>
+          <button class="menu-btn" id="submitReview" style="background: #e63946; width: auto; padding: 14px 35px;">Submit Review</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Map Page -->
+  <div class="page" id="map-page">
+    <div class="container">
+      <h1 class="section-title">Where you will be</h1>
+      <p style="font-size: 1.1rem; margin-bottom: 20px;">📍 <strong>Maungani, near University of Venda Main Gate – R523, Thohoyandou</strong></p>
+      <div id="map"></div>
+      <div style="margin-top: 25px;">
+        <a href="https://maps.google.com/?q=University+of+Venda+Main+Gate+Thohoyandou" target="_blank" class="menu-btn" style="background: transparent; border: 2px solid #e63946; text-decoration: none; display: inline-flex;">
+          <i class="fas fa-map-marker-alt"></i> Open in Google Maps
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Page -->
+  <div class="page" id="contact-page">
+    <div class="container">
+      <h1 class="section-title">Contact Us</h1>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 35px; margin-top: 40px;">
+        <div style="background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%); padding: 40px; border-radius: 32px; text-align: center; transition: all 0.3s;">
+          <i class="fas fa-phone-alt" style="font-size: 3.5rem; color: #e63946;"></i>
+          <h3 style="margin: 20px 0 15px; font-size: 1.5rem;">Phone</h3>
+          <p><a href="tel:+27662672037" style="color: white; text-decoration: none; font-size: 1.2rem;">+27 66 267 2037</a></p>
+        </div>
+        <div style="background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%); padding: 40px; border-radius: 32px; text-align: center; transition: all 0.3s;">
+          <i class="fab fa-whatsapp" style="font-size: 3.5rem; color: #25D366;"></i>
+          <h3 style="margin: 20px 0 15px; font-size: 1.5rem;">WhatsApp</h3>
+          <p><a href="https://wa.me/27662672037" target="_blank" style="color: #25D366; font-size: 1.2rem;">Click to chat</a></p>
+        </div>
+        <div style="background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%); padding: 40px; border-radius: 32px; text-align: center; transition: all 0.3s;">
+          <i class="fas fa-envelope" style="font-size: 3.5rem; color: #e63946;"></i>
+          <h3 style="margin: 20px 0 15px; font-size: 1.5rem;">Email</h3>
+          <p><a href="mailto:info@retema.co.za" style="color: white; font-size: 1.2rem;">info@retema.co.za</a></p>
+        </div>
+        <div style="background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%); padding: 40px; border-radius: 32px; text-align: center; transition: all 0.3s;">
+          <i class="fas fa-map-marker-alt" style="font-size: 3.5rem; color: #e63946;"></i>
+          <h3 style="margin: 20px 0 15px; font-size: 1.5rem;">Address</h3>
+          <p style="color: #ccc;">Maungani, UNIVEN Main Gate<br>Thohoyandou, Limpopo, South Africa</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#">Help Centre</a></li>
+          <li><a href="#">Browse accommodations</a></li>
+          <li><a href="#">Landlord registration</a></li>
+          <li><a href="#">Student registration</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About us</a></li>
+          <li><a href="#">FAQs</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Privacy policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Connect with us</h4>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+        <div class="footer-whatsapp">
+          <a href="https://wa.me/27662672037" target="_blank">
+            <i class="fab fa-whatsapp"></i> +27 66 267 2037
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Subscribe</h4>
+        <input type="email" placeholder="Your email..." id="subEmail" style="padding: 12px; border-radius: 50px; border: none; width: 100%; background: #2c2c2c; color: white;">
+        <button class="menu-btn" id="subBtn" style="margin-top: 12px; width: 100%; padding: 12px;">Subscribe</button>
+        <p style="font-size: 0.8rem; margin-top: 10px; color: #888;">(coming soon)</p>
+      </div>
+    </div>
+    <div style="text-align: center; border-top: 1px solid #2c2c2c; padding-top: 30px; margin-top: 30px;">
+      <p>© 2025 Retema Student Accommodation. All Rights Reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
+<script>
+  const WHATSAPP_NUMBER = "27662672037";
+  
+  // Room data with 4 images each
+  const roomPrices = [3700, 2500, 2300, 2000, 1700, 1300];
+  const roomImages = [
+    ['https://picsum.photos/id/164/800/600', 'https://picsum.photos/id/169/800/600', 'https://picsum.photos/id/175/800/600', 'https://picsum.photos/id/156/800/600'],
+    ['https://picsum.photos/id/20/800/600', 'https://picsum.photos/id/22/800/600', 'https://picsum.photos/id/29/800/600', 'https://picsum.photos/id/96/800/600'],
+    ['https://picsum.photos/id/103/800/600', 'https://picsum.photos/id/107/800/600', 'https://picsum.photos/id/116/800/600', 'https://picsum.photos/id/119/800/600'],
+    ['https://picsum.photos/id/132/800/600', 'https://picsum.photos/id/135/800/600', 'https://picsum.photos/id/142/800/600', 'https://picsum.photos/id/145/800/600'],
+    ['https://picsum.photos/id/152/800/600', 'https://picsum.photos/id/155/800/600', 'https://picsum.photos/id/159/800/600', 'https://picsum.photos/id/161/800/600'],
+    ['https://picsum.photos/id/177/800/600', 'https://picsum.photos/id/178/800/600', 'https://picsum.photos/id/186/800/600', 'https://picsum.photos/id/188/800/600']
+  ];
+  const roomTitles = ["Premium Suite", "Deluxe Double", "Comfort Single", "Standard Plus", "Budget Friendly", "Value Room"];
+  
+  function renderRooms() {
+    const container = document.getElementById('roomsContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    roomPrices.forEach((price, idx) => {
+      const card = document.createElement('div');
+      card.className = 'room-card';
+      let imgsHtml = '';
+      for (let i = 0; i < 4; i++) {
+        imgsHtml += `<a href="${roomImages[idx][i]}" data-lightbox="room-${idx}" data-title="${roomTitles[idx]} - R${price}/month"><img src="${roomImages[idx][i]}" alt="Room view ${i+1}"></a>`;
+      }
+      const nsfasText = (price <= 2500) ? '<span style="background:#2c2c2c; display:inline-block; padding:5px 14px; border-radius:30px; font-size:0.75rem;">🏅 NSFAS Friendly</span>' : '<span style="background:#2c2c2c; display:inline-block; padding:5px 14px; border-radius:30px; font-size:0.75rem;">💰 Bursary / Cash</span>';
+      const whatsappMsg = `Hello! I'm interested in the R${price} ${roomTitles[idx]} at Retema. Please let me know availability.`;
+      const roomWhatsappLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappMsg)}`;
+      
+      card.innerHTML = `
+        <div class="room-img-gallery">${imgsHtml}</div>
+        <div class="room-info">
+          <div class="price">R ${price.toLocaleString()} <small>/month</small></div>
+          <div style="font-weight: 700; margin: 8px 0; font-size: 1.1rem;">${roomTitles[idx]}</div>
+          ${nsfasText}
+          <div style="margin: 15px 0; display: flex; gap: 15px; font-size: 0.85rem; color: #aaa;">
+            <span><i class="fas fa-shower"></i> En-suite</span>
+            <span><i class="fas fa-wifi"></i> WiFi included</span>
+            <span><i class="fas fa-bed"></i> Fully furnished</span>
+          </div>
+          <a href="${roomWhatsappLink}" target="_blank" class="btn-whatsapp-room">
+            <i class="fab fa-whatsapp"></i> Book Now / Interested
+          </a>
+        </div>
+      `;
+      container.appendChild(card);
+    });
+  }
+  
+  // Facility Gallery with lightbox
+  const facilityImgs = [
+    'https://picsum.photos/id/26/800/600', 'https://picsum.photos/id/28/800/600', 'https://picsum.photos/id/39/800/600',
+    'https://picsum.photos/id/40/800/600', 'https://picsum.photos/id/48/800/600', 'https://picsum.photos/id/58/800/600'
+  ];
+  const facilityNames = ['Laundry Area', 'Modern Kitchen', 'On-site Tuckshop', 'Secure Parking', 'CCTV Surveillance', 'Study & Lounge'];
+  
+  function renderGallery() {
+    const galleryDiv = document.getElementById('facilityGallery');
+    if (!galleryDiv) return;
+    galleryDiv.innerHTML = '';
+    facilityImgs.forEach((img, idx) => {
+      const item = document.createElement('div');
+      item.className = 'gallery-item';
+      item.innerHTML = `
+        <a href="${img}" data-lightbox="facility" data-title="${facilityNames[idx]}">
+          <img src="${img}" alt="${facilityNames[idx]}">
+          <div class="gallery-caption">${facilityNames[idx]}</div>
+        </a>
+      `;
+      galleryDiv.appendChild(item);
+    });
+  }
+  
+  // Page Navigation
+  const menuOverlay = document.getElementById('menuOverlay');
+  const menuButton = document.getElementById('menuButton');
+  const closeMenu = document.getElementById('closeMenu');
+  const menuOptions = document.querySelectorAll('.menu-option');
+  const pages = document.querySelectorAll('.page');
+  
+  function showPage(pageId) {
+    pages.forEach(page => {
+      page.classList.remove('active');
+    });
+    const activePage = document.getElementById(`${pageId}-page`);
+    if (activePage) {
+      activePage.classList.add('active');
+    }
+    menuOverlay.classList.remove('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  
+  menuButton.addEventListener('click', () => {
+    menuOverlay.classList.add('active');
+  });
+  
+  closeMenu.addEventListener('click', () => {
+    menuOverlay.classList.remove('active');
+  });
+  
+  menuOptions.forEach(option => {
+    option.addEventListener('click', () => {
+      const pageId = option.getAttribute('data-page');
+      showPage(pageId);
+    });
+  });
+  
+  document.getElementById('logoHome')?.addEventListener('click', () => {
+    showPage('home');
+  });
+  
+  document.getElementById('exploreBtn')?.addEventListener('click', () => {
+    showPage('rooms');
+  });
+  
+  document.getElementById('contactBtn')?.addEventListener('click', () => {
+    showPage('contact');
+  });
+  
+  // Close overlay when clicking outside
+  menuOverlay.addEventListener('click', (e) => {
+    if (e.target === menuOverlay) {
+      menuOverlay.classList.remove('active');
+    }
+  });
+  
+  // Review System
+  let reviews = [];
+  
+  function updateReviewsUI() {
+    const reviewsDiv = document.getElementById('reviewsList');
+    const countSpan = document.getElementById('reviewCount');
+    const avgStarsSpan = document.getElementById('avgStars');
+    const avgNumSpan = document.getElementById('avgRatingDisplay');
+    if (!reviewsDiv) return;
+    
+    if (reviews.length === 0) {
+      reviewsDiv.innerHTML = '<div class="review-card"><i>No reviews yet. Be the first to review this accommodation.</i></div>';
+      if (avgStarsSpan) avgStarsSpan.innerHTML = '☆☆☆☆☆';
+      if (avgNumSpan) avgNumSpan.innerText = '0';
+      if (countSpan) countSpan.innerText = '0';
+      return;
+    }
+    let total = 0;
+    reviews.forEach(r => total += r.rating);
+    const avg = total / reviews.length;
+    const fullStars = Math.round(avg);
+    let starStr = '';
+    for (let i = 1; i <= 5; i++) starStr += i <= fullStars ? '★' : '☆';
+    if (avgStarsSpan) avgStarsSpan.innerHTML = starStr;
+    if (avgNumSpan) avgNumSpan.innerText = avg.toFixed(1);
+    if (countSpan) countSpan.innerText = reviews.length;
+    
+    let html = '';
+    reviews.slice().reverse().forEach(r => {
+      let revStars = '';
+      for (let i = 1; i <= 5; i++) revStars += i <= r.rating ? '★' : '☆';
+      html += `<div class="review-card"><strong style="font-size: 1.1rem;">${r.name}</strong> ${revStars}<br><p style="margin-top: 12px;">${r.comment}</p><br><span style="font-size:12px; color:#888;">📅 ${r.date}</span></div>`;
+    });
+    reviewsDiv.innerHTML = html;
+  }
+  
+  document.getElementById('submitReview')?.addEventListener('click', () => {
+    const name = document.getElementById('reviewerName')?.value.trim();
+    const rating = parseInt(document.getElementById('reviewRating')?.value);
+    const comment = document.getElementById('reviewComment')?.value.trim();
+    if (!name || !comment) {
+      alert('Please enter your name and review comment.');
+      return;
+    }
+    reviews.push({ name, rating, comment, date: new Date().toLocaleDateString('en-ZA') });
+    updateReviewsUI();
+    if (document.getElementById('reviewerName')) document.getElementById('reviewerName').value = '';
+    if (document.getElementById('reviewComment')) document.getElementById('reviewComment').value = '';
+    alert('Thank you for your review!');
+  });
+  
+  document.getElementById('subBtn')?.addEventListener('click', () => {
+    const email = document.getElementById('subEmail')?.value;
+    if (email && email.includes('@')) {
+      alert(`Thanks for subscribing! ${email} (coming soon)`);
+      document.getElementById('subEmail').value = '';
+    } else {
+      alert('Please enter a valid email address');
+    }
+  });
+  
+  // Map
+  function initMap() {
+    const mapDiv = document.getElementById('map');
+    if (mapDiv && typeof L !== 'undefined') {
+      const univenGate = [-22.978, 30.445];
+      const map = L.map('map').setView(univenGate, 16);
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; OpenStreetMap contributors',
+        subdomains: 'abcd',
+        maxZoom: 19
+      }).addTo(map);
+      L.marker(univenGate).addTo(map).bindPopup('<b>🏠 Retema Student Accommodation</b><br>Maungani, UNIVEN Main Gate<br>📍 Just minutes from campus');
+    }
+  }
+  
+  // Initialize everything
+  renderRooms();
+  renderGallery();
+  setTimeout(() => {
+    initMap();
+  }, 500);
+  
+  // Sample review
+  setTimeout(() => {
+    if (reviews.length === 0) {
+      reviews.push({ name: "Thabo M.", rating: 5, comment: "Amazing place, super close to UNIVEN gate. WiFi is fast, security is top-notch, and the rooms are clean and modern!", date: "2025-02-15" });
+      updateReviewsUI();
+    }
+  }, 500);
+</script>
 </body>
 </html>
