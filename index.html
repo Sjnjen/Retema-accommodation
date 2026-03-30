@@ -35,10 +35,11 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      transition: opacity 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+      transition: opacity 1s cubic-bezier(0.19, 1, 0.22, 1);
     }
     .loading-screen.hidden {
       opacity: 0;
+      visibility: hidden;
       pointer-events: none;
     }
     .loading-logo {
@@ -66,13 +67,11 @@
       height: 100%;
       background: linear-gradient(90deg, #e63946, #ff8c42);
       border-radius: 4px;
-      transition: width 0.3s ease;
-      animation: loadingProgress 1.8s ease forwards;
+      animation: loadingProgress 2s ease forwards;
     }
     @keyframes loadingProgress {
       0% { width: 0%; }
-      40% { width: 45%; }
-      70% { width: 80%; }
+      50% { width: 65%; }
       100% { width: 100%; }
     }
     @keyframes fadeInUp {
@@ -125,7 +124,6 @@
     }
     .logo:hover {
       transform: scale(1.02);
-      letter-spacing: 0.5px;
     }
     .logo-main {
       font-size: 2.8rem;
@@ -162,7 +160,6 @@
     .menu-btn:hover {
       transform: translateY(-2px);
       box-shadow: 0 8px 25px rgba(230, 57, 70, 0.5);
-      letter-spacing: 0.3px;
     }
     
     /* Premium Overlay Menu */
@@ -178,7 +175,6 @@
       display: none;
       justify-content: center;
       align-items: center;
-      animation: fadeIn 0.4s ease;
     }
     .menu-overlay.active {
       display: flex;
@@ -191,7 +187,7 @@
       width: 90%;
       text-align: center;
       border: 1px solid rgba(230, 57, 70, 0.4);
-      box-shadow: 0 30px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(230,57,70,0.1);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.6);
       animation: scaleIn 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1);
     }
     @keyframes scaleIn {
@@ -238,7 +234,6 @@
       background: linear-gradient(135deg, #e63946, #ff6b4a);
       transform: translateX(8px);
       border-color: transparent;
-      box-shadow: 0 5px 20px rgba(230,57,70,0.4);
     }
     .close-menu {
       margin-top: 35px;
@@ -532,6 +527,15 @@
       transform: translateX(8px);
       background: rgba(40,40,40,0.8);
     }
+    .review-form input, .review-form select, .review-form textarea {
+      background: #2a2a2a;
+      border: none;
+      padding: 14px;
+      border-radius: 28px;
+      color: white;
+      margin: 10px 0;
+      width: 100%;
+    }
     
     /* Map */
     #map {
@@ -561,10 +565,14 @@
       font-size: 1.2rem;
       font-weight: 600;
     }
+    .footer-col ul {
+      list-style: none;
+    }
     .footer-col a {
       color: #bbb;
       text-decoration: none;
       transition: 0.2s;
+      line-height: 2;
     }
     .footer-col a:hover {
       color: #e63946;
@@ -575,6 +583,7 @@
       margin-right: 20px;
       color: white;
       transition: all 0.3s;
+      display: inline-block;
     }
     .social-icons a:hover {
       color: #e63946;
@@ -712,15 +721,15 @@
         <div id="reviewsList"></div>
         <div class="review-form" style="margin-top: 35px;">
           <h3 style="margin-bottom: 20px;">Write a review</h3>
-          <input type="text" id="reviewerName" placeholder="Your name" style="width:100%; background:#2a2a2a; border:none; padding:14px; border-radius:28px; color:white; margin:10px 0;">
-          <select id="reviewRating" style="width:100%; background:#2a2a2a; border:none; padding:14px; border-radius:28px; color:white;">
+          <input type="text" id="reviewerName" placeholder="Your name">
+          <select id="reviewRating">
             <option value="5">★★★★★ (5) - Excellent</option>
             <option value="4">★★★★☆ (4) - Very Good</option>
             <option value="3">★★★☆☆ (3) - Good</option>
             <option value="2">★★☆☆☆ (2) - Fair</option>
             <option value="1">★☆☆☆☆ (1) - Poor</option>
           </select>
-          <textarea id="reviewComment" rows="4" placeholder="Tell us about your stay..." style="width:100%; background:#2a2a2a; border:none; padding:14px; border-radius:28px; color:white; margin:10px 0;"></textarea>
+          <textarea id="reviewComment" rows="4" placeholder="Tell us about your stay..."></textarea>
           <button class="menu-btn" id="submitReview" style="background:#e63946; width:auto; padding:12px 35px;">Submit Review</button>
         </div>
       </div>
@@ -761,7 +770,7 @@
     <div class="footer-grid">
       <div class="footer-col">
         <h4>Quick Links</h4>
-        <ul style="list-style:none;"><li><a href="#">Help Centre</a></li><li><a href="#">Student registration</a></li></ul>
+        <ul><li><a href="#">Help Centre</a></li><li><a href="#">Student registration</a></li></ul>
       </div>
       <div class="footer-col">
         <h4>Connect</h4>
@@ -776,6 +785,16 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
 <script>
+  // FIXED: Hide loading screen after page fully loads
+  window.addEventListener('load', function() {
+    setTimeout(function() {
+      const loadingScreen = document.getElementById('loadingScreen');
+      if (loadingScreen) {
+        loadingScreen.classList.add('hidden');
+      }
+    }, 2200);
+  });
+
   const WHATSAPP_NUMBER = "27662672037";
   
   // Room data
@@ -801,6 +820,8 @@
       }
       const whatsappMsg = `Hello! I'm interested in the R${price} ${roomTitles[idx]} at Retema. Please let me know availability.`;
       const roomWhatsappLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappMsg)}`;
+      const card = document.createElement('div');
+      card.className = 'room-card';
       card.innerHTML = `
         <div class="room-img-gallery">${imgsHtml}</div>
         <div class="room-info">
@@ -853,19 +874,21 @@
     pages.forEach(page => page.classList.remove('active'));
     const activePage = document.getElementById(`${pageId}-page`);
     if (activePage) activePage.classList.add('active');
-    menuOverlay.classList.remove('active');
+    if (menuOverlay) menuOverlay.classList.remove('active');
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    // Trigger letter animation on visible elements
     setTimeout(() => triggerLetterAnimation(), 100);
   }
   
-  menuButton?.addEventListener('click', () => menuOverlay.classList.add('active'));
-  closeMenu?.addEventListener('click', () => menuOverlay.classList.remove('active'));
+  if (menuButton) menuButton.addEventListener('click', () => menuOverlay.classList.add('active'));
+  if (closeMenu) closeMenu.addEventListener('click', () => menuOverlay.classList.remove('active'));
   menuOptions.forEach(option => option.addEventListener('click', () => showPage(option.getAttribute('data-page'))));
-  document.getElementById('logoHome')?.addEventListener('click', () => showPage('home'));
-  document.getElementById('exploreBtn')?.addEventListener('click', () => showPage('rooms'));
-  document.getElementById('contactBtn')?.addEventListener('click', () => showPage('contact'));
-  menuOverlay?.addEventListener('click', (e) => { if (e.target === menuOverlay) menuOverlay.classList.remove('active'); });
+  const logoHome = document.getElementById('logoHome');
+  if (logoHome) logoHome.addEventListener('click', () => showPage('home'));
+  const exploreBtn = document.getElementById('exploreBtn');
+  if (exploreBtn) exploreBtn.addEventListener('click', () => showPage('rooms'));
+  const contactBtn = document.getElementById('contactBtn');
+  if (contactBtn) contactBtn.addEventListener('click', () => showPage('contact'));
+  if (menuOverlay) menuOverlay.addEventListener('click', (e) => { if (e.target === menuOverlay) menuOverlay.classList.remove('active'); });
   
   // Letter-by-letter animation trigger
   function triggerLetterAnimation() {
@@ -908,23 +931,26 @@
       return `<div class="review-card"><strong>${r.name}</strong> ${revStars}<br><p style="margin-top:12px;">${r.comment}</p><span style="font-size:12px; color:#888;">${r.date}</span></div>`;
     }).join('');
   }
-  document.getElementById('submitReview')?.addEventListener('click', () => {
-    const name = document.getElementById('reviewerName')?.value.trim();
-    const rating = parseInt(document.getElementById('reviewRating')?.value);
-    const comment = document.getElementById('reviewComment')?.value.trim();
-    if (!name || !comment) { alert('Please enter your name and review.'); return; }
-    reviews.push({ name, rating, comment, date: new Date().toLocaleDateString('en-ZA') });
-    updateReviewsUI();
-    document.getElementById('reviewerName').value = '';
-    document.getElementById('reviewComment').value = '';
-    alert('Thank you for your review!');
-  });
+  const submitReview = document.getElementById('submitReview');
+  if (submitReview) {
+    submitReview.addEventListener('click', () => {
+      const name = document.getElementById('reviewerName')?.value.trim();
+      const rating = parseInt(document.getElementById('reviewRating')?.value);
+      const comment = document.getElementById('reviewComment')?.value.trim();
+      if (!name || !comment) { alert('Please enter your name and review.'); return; }
+      reviews.push({ name, rating, comment, date: new Date().toLocaleDateString('en-ZA') });
+      updateReviewsUI();
+      if (document.getElementById('reviewerName')) document.getElementById('reviewerName').value = '';
+      if (document.getElementById('reviewComment')) document.getElementById('reviewComment').value = '';
+      alert('Thank you for your review!');
+    });
+  }
   
   // Map with exact coordinates from first website
   function initMap() {
     const mapDiv = document.getElementById('map');
     if (mapDiv && typeof L !== 'undefined') {
-      const location = [-22.978815, 30.433430]; // Updated coordinates
+      const location = [-22.978815, 30.433430];
       const map = L.map('map').setView(location, 17);
       L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', { attribution: '© OpenStreetMap' }).addTo(map);
       L.marker(location).addTo(map).bindPopup('<b>🏠 Retema Student Accommodation</b><br>Maungani, UNIVEN Main Gate<br>📍 Premium student living');
@@ -941,11 +967,6 @@
     initMap();
     triggerLetterAnimation();
   }, 500);
-  
-  // Hide loading screen
-  setTimeout(() => {
-    document.getElementById('loadingScreen')?.classList.add('hidden');
-  }, 2000);
   
   // Intersection Observer for letter animations on scroll
   const observer = new IntersectionObserver((entries) => {
