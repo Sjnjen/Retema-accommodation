@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -378,11 +379,14 @@ function renderRooms() {
 function renderGallery() {
   const galleryGrid = document.getElementById('galleryGrid');
   if(!galleryGrid) return;
-  const imageIds = [169,175,156,29,96,116,20,164,165,166,167,168,132,133,134,135,136,152,153,154,155,177,178,179,180,181,21,22,23,24,103,104,105,106,107,40,41,42,43,44,45];
-  const images = [];
-  for(let i=0; i<42; i++) images.push(`https://picsum.photos/id/${imageIds[i%imageIds.length]}/800/600`);
-  galleryGrid.innerHTML = images.map(img => `<div class="gallery-item" data-img="${img}"><img src="${img}" loading="lazy" alt="Retema Gallery"></div>`).join('');
-  document.querySelectorAll('.gallery-item').forEach((item, idx) => item.addEventListener('click', () => openLightboxStatic(images[idx])));
+  // Updated to use local images out1.jpg to out16.jpg as requested
+  const localImages = [];
+  for(let i = 1; i <= 16; i++) {
+    localImages.push(`out${i}.jpg`);
+  }
+  // Create gallery items with the 16 local images (repeat slightly if needed but 16 is good)
+  galleryGrid.innerHTML = localImages.map(img => `<div class="gallery-item" data-img="${img}"><img src="${img}" loading="lazy" alt="Retema Gallery"></div>`).join('');
+  document.querySelectorAll('.gallery-item').forEach((item, idx) => item.addEventListener('click', () => openLightboxStatic(localImages[idx])));
 }
 
 function renderAmenities() {
